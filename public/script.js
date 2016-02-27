@@ -1,9 +1,10 @@
 $(document).ready(function() {
+    console.log('ready');
     $.ajax({
         url: '/posts',
         dataType: 'json',
         success: function(data) {
-
+console.log('success');
             for (var blogPost in data) {
                 var postDiv         = document.createElement('div');
                 var postText        = document.createElement('p');
@@ -18,7 +19,7 @@ $(document).ready(function() {
                 postDiv.appendChild(thumbnail);
                 postDiv.appendChild(postText);
                 postContainer.appendChild(postDiv);
-                
+
             }
         },
         error: function(error){

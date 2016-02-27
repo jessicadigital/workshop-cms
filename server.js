@@ -1,3 +1,4 @@
+var querystring = require('querystring');
 var http = require('http');
 var fs = require('fs');
 
@@ -33,6 +34,21 @@ function handler(request, response) {
 		response.write('We are girls!');
   	response.end(); // finish response
 	}
+
+	else if (endpoint === '/create-post' && method==='POST') {
+		var allTheData = '';
+		request.on('data', function (chunkOfData) {
+
+			allTheData += chunkOfData;
+		});
+		request.on('end', function () {
+			var convertedData = querystring.parse(allTheData);
+			console.log(convertedData);	
+			response.writeHead(308, {"Location": "/"});
+			response.end();
+		});
+	}
+
 	else {
 		if (endpoint.indexOf('.css') > -1) {
 			response.writeHead(200, {"Content-Type": "text/css"});
